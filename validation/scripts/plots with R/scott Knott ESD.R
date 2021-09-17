@@ -1,0 +1,15 @@
+#install.packages("devtools")
+library("devtools")
+#devtools::install_github("klainfo/ScottKnottESD", ref="development")
+library(ScottKnottESD)
+# Using Non-Parametric ScottKnott ESD test
+sk <- sk_esd(df, version="np")
+write.csv(sk[5],"scores_dt.csv")
+write.csv(sk[2],"groups_dt.csv")
+scores<- read.csv("scores_dt.csv")
+grps<- read.csv("groups_dt.csv")
+total <- merge(grps,scores, by="X")
+write.csv(total,"scott_cross.csv")
+file.remove("scores_dt.csv")
+file.remove("groups_dt.csv")
+
